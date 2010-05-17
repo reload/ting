@@ -9,16 +9,42 @@
  * Implementation of hook_menu().
  */
 function ting_menu() {
-  $path = drupal_get_path('module', 'ting') . '/includes';
+  $path  = drupal_get_path('module', 'ting') . '/includes';
   $items = array();
-
-  $items['admin/settings/ting'] = array(
-    'title' => 'Ting search',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ting_admin_settings_form'),
-    'access arguments' => array('administer site configuration'),
-    'file' => 'ting.admin.inc',
-    'file path' => $path,
+  
+  $items['admin/settings/ting/default'] = array(
+    'title'            => 'Ting',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('ting_admin_settings_form_normal'),
+    'access arguments' => array('access administration pages'),
+    'file'             => 'ting.admin.inc',
+    'file path'        => $path,
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 1,
+  );
+  
+  $items['admin/settings/ting/addi'] = array(
+    'title'            => 'Additional Information settings',
+    'description'      => 'The Additional Information service is used to retrieve cover images and other information about objects.',
+    'access arguments' => array('access administration pages'),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('ting_admin_settings_form_addi'),
+    'file'             => 'ting.admin.inc',
+    'file path'        => $path,
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 2,
+  );
+  
+  $items['admin/settings/ting/proxy'] = array(
+    'title'            => 'Proxy service',
+    'description'      => 'Restricted-access resources referenced by Ting may be accessed through the library\'s proxy server',
+    'access arguments' => array('access administration pages'),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('ting_admin_settings_form_proxy'),
+    'file'             => 'ting.admin.inc',
+    'file path'        => $path,
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 3,
   );
 
   return $items;

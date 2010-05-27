@@ -16,6 +16,3 @@ CVS
 # Patch files
 *.patch
 
-# The client libraries.
-lib/ting-client
-

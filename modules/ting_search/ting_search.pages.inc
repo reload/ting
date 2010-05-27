@@ -8,7 +8,6 @@ function ting_search_pages_redirect() {
   if (isset($_POST['keys'])) {
     return drupal_goto('ting/search/' . $_POST['keys']);
   }
-
   $keys = search_get_keys();
   if (strlen($keys) > 0) {
     // Redirect to the new Panels based search.

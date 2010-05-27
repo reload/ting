@@ -37,7 +37,7 @@ function ting_search_default_page_manager_pages() {
   $handler->task = 'page';
   $handler->subtask = 'search_results';
   $handler->handler = 'panel_context';
-  $handler->weight = 0;
+  $handler->weight = 50;
   $handler->conf = array(
     'title' => 'Panel',
     'no_blocks' => FALSE,
@@ -47,17 +47,16 @@ function ting_search_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display;
-  $display->layout = 'twocol_left_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array();
   $display->cache = array();
   $display->title = '';
-  $display->hide_title = FALSE;
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass;
     $pane->pid = 'new-1';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'result';
     $pane->subtype = 'result';
     $pane->shown = TRUE;
@@ -73,35 +72,13 @@ function ting_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $display->content['new-1'] = $pane;
-    $display->panels['left'][0] = 'new-1';
-    $pane = new stdClass;
-    $pane->pid = 'new-2';
-    $pane->panel = 'right';
-    $pane->type = 'relevant';
-    $pane->subtype = 'relevant_campaigns';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'context' => array(
-        '0' => 'empty',
-        '1' => 'empty',
-        '2' => 'argument_string_1',
-      ),
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array();
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $display->content['new-2'] = $pane;
-    $display->panels['right'][0] = 'new-2';
+    $display->panels['middle'][0] = 'new-1';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['search_results'] = $page;
 
-  /** Object view page **/
   $page = new stdClass;
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;
@@ -129,7 +106,7 @@ function ting_search_default_page_manager_pages() {
   $handler->task = 'page';
   $handler->subtask = 'ting_object_view';
   $handler->handler = 'panel_context';
-  $handler->weight = -10;
+  $handler->weight = 49;
   $handler->conf = array(
     'title' => 'Periodic object view',
     'no_blocks' => FALSE,
@@ -155,7 +132,7 @@ function ting_search_default_page_manager_pages() {
     ),
   );
   $display = new panels_display;
-  $display->layout = 'twocol_left_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array();
   $display->cache = array();
@@ -164,7 +141,7 @@ function ting_search_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass;
     $pane->pid = 'new-1';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'periodical_view';
     $pane->subtype = 'periodical_view';
     $pane->shown = TRUE;
@@ -180,30 +157,7 @@ function ting_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $display->content['new-1'] = $pane;
-    $display->panels['left'][0] = 'new-1';
-    $pane = new stdClass;
-    $pane->pid = 'new-2';
-    $pane->panel = 'right';
-    $pane->type = 'relevant';
-    $pane->subtype = 'relevant_campaigns';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'context' => array(
-        '0' => 'empty',
-        '1' => 'empty',
-        '2' => 'empty',
-      ),
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array();
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $display->content['new-2'] = $pane;
-    $display->panels['right'][0] = 'new-2';
+    $display->panels['middle'][0] = 'new-1';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -215,7 +169,7 @@ function ting_search_default_page_manager_pages() {
   $handler->task = 'page';
   $handler->subtask = 'ting_object_view';
   $handler->handler = 'panel_context';
-  $handler->weight = -9;
+  $handler->weight = 50;
   $handler->conf = array(
     'title' => 'Generic object view',
     'no_blocks' => 0,
@@ -225,7 +179,7 @@ function ting_search_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display;
-  $display->layout = 'twocol_left_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array();
   $display->cache = array();
@@ -234,7 +188,7 @@ function ting_search_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass;
     $pane->pid = 'new-1';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'object_view';
     $pane->subtype = 'object_view';
     $pane->shown = TRUE;
@@ -250,10 +204,10 @@ function ting_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $display->content['new-1'] = $pane;
-    $display->panels['left'][0] = 'new-1';
+    $display->panels['middle'][0] = 'new-1';
     $pane = new stdClass;
     $pane->pid = 'new-2';
-    $pane->panel = 'left';
+    $pane->panel = 'middle';
     $pane->type = 'recommendation_list';
     $pane->subtype = 'recommendation_list';
     $pane->shown = TRUE;
@@ -272,20 +226,66 @@ function ting_search_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $display->content['new-2'] = $pane;
-    $display->panels['left'][1] = 'new-2';
+    $display->panels['middle'][1] = 'new-2';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['ting_object_view'] = $page;
+
+  $page = new stdClass;
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'ting_collection_view';
+  $page->task = 'page';
+  $page->admin_title = 'Ting collection view';
+  $page->admin_description = 'Provides a page displaying a Ting collection.';
+  $page->path = 'ting/collection/%collection_id';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array(
+    'collection_id' => array(
+      'id' => 1,
+      'identifier' => 'Ting collection',
+      'name' => 'collection_id',
+      'settings' => array(),
+    ),
+  );
+  $page->conf = array();
+  $page->default_handlers = array();
+  $handler = new stdClass;
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_ting_collection_view_panel_context';
+  $handler->task = 'page';
+  $handler->subtask = 'ting_collection_view';
+  $handler->handler = 'panel_context';
+  $handler->weight = 50;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => FALSE,
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display;
+  $display->layout = 'onecol';
+  $display->layout_settings = array();
+  $display->panel_settings = array();
+  $display->cache = array();
+  $display->title = '%collection_id:title_full';
+  $display->content = array();
+  $display->panels = array();
     $pane = new stdClass;
-    $pane->pid = 'new-3';
-    $pane->panel = 'right';
-    $pane->type = 'relevant';
-    $pane->subtype = 'relevant_campaigns';
+    $pane->pid = 'new-1';
+    $pane->panel = 'middle';
+    $pane->type = 'collection_view';
+    $pane->subtype = 'collection_view';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => array(
-        '0' => 'empty',
-        '1' => 'empty',
-        '2' => 'empty',
-      ),
+      'context' => 'argument_collection_id_1',
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -294,130 +294,35 @@ function ting_search_default_page_manager_pages() {
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
-    $display->content['new-3'] = $pane;
-    $display->panels['right'][0] = 'new-3';
+    $display->content['new-1'] = $pane;
+    $display->panels['middle'][0] = 'new-1';
+    $pane = new stdClass;
+    $pane->pid = 'new-2';
+    $pane->panel = 'middle';
+    $pane->type = 'recommendation_list';
+    $pane->subtype = 'recommendation_list';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => array(
+        '0' => 'empty',
+        '1' => 'argument_collection_id_1',
+      ),
+      'override_title' => 1,
+      'override_title_text' => 'Andre der har lånt',
+    );
+    $pane->cache = array();
+    $pane->style = array();
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $display->content['new-2'] = $pane;
+    $display->panels['middle'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
+  $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
-
-  $pages['ting_object_view'] = $page;
-
-  /** Collection view page **/
-  
-	$page = new stdClass;
-	$page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
-	$page->api_version = 1;
-	$page->name = 'ting_collection_view';
-	$page->task = 'page';
-	$page->admin_title = 'Ting collection view';
-	$page->admin_description = 'Provides a page displaying a Ting collection.';
-	$page->path = 'ting/collection/%collection_id';
-	$page->access = array();
-	$page->menu = array();
-	$page->arguments = array(
-	  'collection_id' => array(
-	    'id' => 1,
-	    'identifier' => 'Ting collection',
-	    'name' => 'collection_id',
-	    'settings' => array(),
-	  ),
-	);
-	$page->conf = array();
-	$page->default_handlers = array();
-	$handler = new stdClass;
-	$handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
-	$handler->api_version = 1;
-	$handler->name = 'page_ting_collection_view_panel_context';
-	$handler->task = 'page';
-	$handler->subtask = 'ting_collection_view';
-	$handler->handler = 'panel_context';
-	$handler->weight = 0;
-	$handler->conf = array(
-	  'title' => 'Panel',
-	  'no_blocks' => FALSE,
-	  'css_id' => '',
-	  'css' => '',
-	  'contexts' => array(),
-	  'relationships' => array(),
-	);
-	$display = new panels_display;
-	$display->layout = 'twocol_left_stacked';
-	$display->layout_settings = array();
-	$display->panel_settings = array();
-	$display->cache = array();
-	$display->title = '%collection_id:title_full';
-	$display->hide_title = FALSE;
-	$display->content = array();
-	$display->panels = array();
-	  $pane = new stdClass;
-	  $pane->pid = 'new-1';
-	  $pane->panel = 'left';
-	  $pane->type = 'collection_view';
-	  $pane->subtype = 'collection_view';
-	  $pane->shown = TRUE;
-	  $pane->access = array();
-	  $pane->configuration = array(
-	    'context' => 'argument_collection_id_1',
-	    'override_title' => 0,
-	    'override_title_text' => '',
-	  );
-	  $pane->cache = array();
-	  $pane->style = array();
-	  $pane->css = array();
-	  $pane->extras = array();
-	  $pane->position = 0;
-	  $display->content['new-1'] = $pane;
-	  $display->panels['left'][0] = 'new-1';
-	  $pane = new stdClass;
-	  $pane->pid = 'new-2';
-	  $pane->panel = 'left';
-	  $pane->type = 'recommendation_list';
-	  $pane->subtype = 'recommendation_list';
-	  $pane->shown = TRUE;
-	  $pane->access = array();
-	  $pane->configuration = array(
-	    'context' => array(
-	      '0' => 'empty',
-	      '1' => 'argument_collection_id_1',
-	    ),
-	    'override_title' => 1,
-	    'override_title_text' => 'Andre der har lånt',
-	  );
-	  $pane->cache = array();
-	  $pane->style = array();
-	  $pane->css = array();
-	  $pane->extras = array();
-	  $pane->position = 1;
-	  $display->content['new-2'] = $pane;
-	  $display->panels['left'][1] = 'new-2';
-	  $pane = new stdClass;
-	  $pane->pid = 'new-3';
-	  $pane->panel = 'right';
-	  $pane->type = 'relevant';
-	  $pane->subtype = 'relevant_campaigns';
-	  $pane->shown = TRUE;
-	  $pane->access = array();
-	  $pane->configuration = array(
-	    'context' => array(
-	      '0' => 'empty',
-	      '1' => 'empty',
-	      '2' => 'empty',
-	    ),
-	    'override_title' => 0,
-	    'override_title_text' => '',
-	  );
-	  $pane->cache = array();
-	  $pane->style = array();
-	  $pane->css = array();
-	  $pane->extras = array();
-	  $pane->position = 0;
-	  $display->content['new-3'] = $pane;
-	  $display->panels['right'][0] = 'new-3';
-	$handler->conf['display'] = $display;
-	$page->default_handlers[$handler->name] = $handler;
   $pages['ting_collection_view'] = $page;
 
-  return $pages;
+ return $pages;
 }
-

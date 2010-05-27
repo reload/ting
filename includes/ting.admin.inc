@@ -64,7 +64,7 @@ function ting_admin_settings_form_addi($form_state) {
 
   $form['addi'] = array(
     '#type'        => 'fieldset',
-    '#title'       => t('Additional Information settings'),
+    '#title'       => t('Ting - Additional Information settings'),
   	'#description' => t('The Additional Information service is used to retrieve cover images and other information about objects. <a href="http://www.danbib.dk/index.php?doc=forsideservice">More information about the service (in Danish)</a>'),
     '#tree'        => FALSE,
   );
@@ -113,7 +113,7 @@ function ting_admin_settings_form_proxy($form_state) {
   
   $form['proxy'] = array(
     '#type'        => 'fieldset',
-    '#title'       => t('Proxy service'),
+    '#title'       => t('Ting Proxy service'),
   	'#description' => t('Restricted-access resources referenced by Ting may be accessed through the library\'s proxy server'),
     '#tree'        => FALSE,
   );
@@ -133,6 +133,46 @@ function ting_admin_settings_form_proxy($form_state) {
     '#description'    => t('Enter one hostname per line, e.g. <em>magazine.example.com</em>. Do not include the <em>http://</em> prefix.'),
   );
 
+  return system_settings_form($form);
+}
+/**
+ * Ting search settings form - Material tab
+ * 
+ * @author Hasse R. Hansen <hasse@reload.dk>
+ */
+function ting_admin_settings_form_material($form_state) {
+  $form = $options = array();
+  
+  $form['material'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Ting Materials'),
+    '#description' => t('Choose in which materials to search'),
+    '#tree' => FALSE
+  );
+  
+  // Fetch material information from Ting
+  require_once drupal_get_path('module', 'ting') . '/ting.client.inc';
+  $request = ting_get_request_factory()->getScanRequest();
+	$request->setField('phrase.type');
+	$request->setLower('');
+	
+	// TODO: Fix webservice to really use the quantity
+	$request->setNumResults(9999);
+	$data = ting_execute($request);
+	
+  foreach ($data->terms as $m) {
+    if ($m->name != '') {
+      $options[$m->name] = $m->name;
+    }
+  }
+  
+  $form['ting_materials'] = array(
+    '#type' => 'checkboxes',
+    '#default_value' => variable_get('ting_materials', array()),
+    '#options' => $options,
+    '#description' => t('Check which material types to be searchable in the ting_ssearch.'),
+  );
+  
   return system_settings_form($form);
 }
 

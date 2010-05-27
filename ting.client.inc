@@ -487,12 +487,11 @@ function ting_add_agency(TingClientAgentRequest $request) {
 }
 
 function ting_remove_supporting_types(TingClientSearchRequest $request) {
-	$supportingTypes = array('materialevurdering*', 'anmeldelse');
+  $supportingTypes = arrange_types(variable_get('ting_materials', array()));
 	foreach ($supportingTypes as &$type)
 	{
-		$type = 'facet.type='.$type;
+		$type = "facet.type=" . $type ;
 	}
-	
 	$request->setQuery($request->getQuery().' NOT ('.implode(' OR ', $supportingTypes).')');
 	return $request;
 }
@@ -516,3 +515,14 @@ function ting_rewrite_download_url($url) {
   return $url;
 }
 
+function arrange_types($types = false) {
+  $return = array();
+  if (is_array($types)) {
+    foreach ($types as $k => $s) {
+      if ($s == false) {
+        $return[] = $k;
+      }
+    }
+  }
+  return $return;
+}

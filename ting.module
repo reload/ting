@@ -46,6 +46,18 @@ function ting_menu() {
     'type'             => MENU_LOCAL_TASK,
     'weight'           => 3,
   );
+  
+  $items['admin/settings/ting/material'] = array(
+    'title'            => 'Material',
+    'description'      => '',
+    'access arguments' => array('access administration pages'),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('ting_admin_settings_form_material'),
+    'file'             => 'ting.admin.inc',
+    'file path'        => $path, 
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 4,
+  );
 
   return $items;
 }

@@ -1,3 +1,0 @@
-[submodule "lib/ting-client"]
-	path = lib/ting-client
-	url = http://github.com/dingproject/ting-client.git

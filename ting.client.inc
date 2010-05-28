@@ -161,7 +161,7 @@ function ting_do_search($query, $page = 1, $resultsPerPage = 10, $options = arra
 	$request->setStart($resultsPerPage * ($page - 1) + 1);
 	$request->setNumResults($resultsPerPage);
   
-	$request = (!isset($options['supportingTypes']) || !$options['supportingTypes']) ? ting_remove_supporting_types($request) : $request;
+	$request = (!isset($options['supportingTypes']) || !$options['supportingTypes']) ? ting_add_supporting_types($request) : $request;
 	$request->setFacets((isset($options['facets'])) ? $options['facets'] : array('facet.subject', 'facet.creator', 'facet.type', 'facet.date', 'facet.language'));
 	$request->setNumFacets((isset($options['numFacets'])) ? $options['numFacets'] : ((sizeof($request->getFacets()) == 0) ? 0 : 10));
   $request->setSort((isset($options['sort'])) ? $options['sort'] : '');
@@ -486,13 +486,16 @@ function ting_add_agency(TingClientAgentRequest $request) {
 	return $request;
 }
 
-function ting_remove_supporting_types(TingClientSearchRequest $request) {
+/**
+* Add checked materials from ting.admin, to the request query
+*/
+function ting_add_supporting_types(TingClientSearchRequest $request) {
   $supportingTypes = arrange_types(variable_get('ting_materials', array()));
 	foreach ($supportingTypes as &$type)
 	{
-		$type = "facet.type=" . $type ;
+		$type = "facet.type=" . $type;
 	}
-	$request->setQuery($request->getQuery().' NOT ('.implode(' OR ', $supportingTypes).')');
+	$request->setQuery($request->getQuery().' ('.implode(' OR ', $supportingTypes).')');
 	return $request;
 }
 
@@ -515,11 +518,17 @@ function ting_rewrite_download_url($url) {
   return $url;
 }
 
+/**
+* Create an array of the chosen materials from ting.admin
+* 
+* @param array $types
+* @return array
+*/
 function arrange_types($types = false) {
   $return = array();
   if (is_array($types)) {
     foreach ($types as $k => $s) {
-      if ($s == false) {
+      if ($s == true) {
         $return[] = $k;
       }
     }

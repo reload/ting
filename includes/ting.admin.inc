@@ -160,11 +160,13 @@ function ting_admin_settings_form_material($form_state) {
 	$request->setNumResults(9999);
 	$data = ting_execute($request);
 	
-  foreach ($data->terms as $m) {
-    if ($m->name != '') {
-      $options[$m->name] = $m->name;
+	if (is_array($data->terms)) {
+    foreach ($data->terms as $m) {
+      if ($m->name != '') {
+        $options[$m->name] = $m->name;
+      }
     }
-  }
+  }  
   
   $form['ting_materials'] = array(
     '#type' => 'checkboxes',

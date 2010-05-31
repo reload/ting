@@ -69,12 +69,14 @@
                 <?php } ?>
               </div>
               <p><?php print check_plain($object->record['dcterms:abstract'][''][0]); ?></p>
-              <?php if ($object->type != 'Netdokument') { ?>
+              <?php if ($object->type != 'Netdokument' && module_exists('alma')) { ?>
                 <div class="alma-status waiting"><?php print t('waiting for data'); ?></div>
               <?php } ?>
             </div>
-
-            <?php print theme('alma_cart_reservation_buttons', $object); ?>
+            
+            <?php if (module_exists('alma')): ?>
+              <?php print theme('alma_cart_reservation_buttons', $object); ?>
+            <?php endif; ?>
 
           </div>
 
@@ -215,7 +217,7 @@
           }
           ?>
 
-          <?php if ($object->type[0] != 'Netdokument') { ?>
+          <?php if ($object->type[0] != 'Netdokument' && module_exists('alma')) { ?>
             <div class="ding-box-wide alma-availability">
               <h3>Følgende biblioteker har "<?php print check_plain($object->title); ?>" hjemme:</h3>
               <ul class="library-list">

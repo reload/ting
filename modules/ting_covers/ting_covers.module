@@ -48,6 +48,52 @@ function ting_covers_object_path($object_id) {
 }
 
 /**
+ * Implements the hook_covers_imagecache_default_presets, makes default presets used for this module
+ *
+ * @return array
+ * @author Hasse R. Hansen, Reload! A/S
+ */
+function ting_covers_imagecache_default_presets() {
+  $presets = array();
+  $presets['180_x'] = array(
+    'presetname' => '180_x',
+    'actions' => array(
+      array (
+         'weight' => '0',
+         'module' => 'imagecache',
+         'action' => 'imagecache_scale',
+         'data' => 
+         array (
+           'width' => '180px',
+           'height' => '',
+           'upscale' => 0,
+         ),
+       ),
+    ),
+  );
+  
+  $presets['80_x'] = array(
+    'presetname' => '80_x',
+    'actions' => array(
+      array (
+         'weight' => '0',
+         'module' => 'imagecache',
+         'action' => 'imagecache_scale',
+         'data' => 
+         array (
+           'width' => '80px',
+           'height' => '',
+           'upscale' => 0,
+         ),
+       ),
+    ),
+  );
+  
+  return $presets;  
+}
+
+
+/**
  * Return the URL to the cover of the object.
  */
 function ting_covers_object_url(TingClientObject $object, $presetname) {

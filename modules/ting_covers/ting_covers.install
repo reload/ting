@@ -11,43 +11,6 @@
  */
 function ting_covers_install() {
   
-  // Define a few imagecache presets
-  $presets =  array(array('presetname' =>'180_x'), array('presetname' => '80_x'));
- 
- // With the following actions attached
-  $imagecache_actions = array(
-      array (
-        'weight' => '0',
-        'module' => 'imagecache',
-        'action' => 'imagecache_scale',
-        'data' => 
-        array (
-          'width' => '180px',
-          'height' => '',
-          'upscale' => 0,
-        ),
-      ),
-
-    array (
-      'weight' => '0',
-      'module' => 'imagecache',
-      'action' => 'imagecache_scale',
-      'data' => 
-      array (
-        'width' => '80px',
-        'height' => '',
-        'upscale' => 0,
-      ),
-    ),
-  );
- 
-  // Loop through the presets and save the actions attached
-  foreach ($presets as $id => $preset) {
-    $preset = imagecache_preset_save($preset);
-    $imagecache_actions[$id]['presetid'] = $preset['presetid'];
-    imagecache_action_save($imagecache_actions[$id]);	
-  }
-  
 	//recursively generate the necessary subdirectories as calls to file_create_path fails for files 
 	//in noexistant subdirectories of files and file_check_directory can not create directories recursively
 	foreach(ting_covers_paths() as $path)

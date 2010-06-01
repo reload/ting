@@ -135,6 +135,59 @@ function ting_admin_settings_form_proxy($form_state) {
 
   return system_settings_form($form);
 }
+
+/**
+ * Fetch material types from TING
+ *
+ * @param string $lower the first material type to fetch
+ * @param int $num - describes how many materials to fetch per query (bug in webservice)
+ * @return array
+ * @author Hasse R. Hansen, Reload! A/S
+ */
+function _fetch_type($lower = '', $num = 10) {
+  require_once drupal_get_path('module', 'ting') . '/ting.client.inc';
+  
+  $request = ting_get_request_factory()->getScanRequest();
+	$request->setField('phrase.type');
+	$request->setLower($lower);
+	$request->setNumResults($num);
+	
+	$data = ting_execute($request);
+  if ($lower != '') {
+    array_shift($data->terms);
+  }
+
+  return $data->terms;
+}
+
+/**
+ * parse data fetched from TING
+ *
+ * @param string $type - material type 
+ * @param array $options 
+ * @return array
+ * @author Hasse R. Hansen, Reload! A/S
+ */
+function _fetch_materials($type = '', $options = array())  {
+  $type_data = _fetch_type($type);
+  
+	if (is_array($type_data)) {
+    foreach ($type_data as $m) {
+      if ($m->name != '') {
+        $options[$m->name] = $m->name;
+      }
+    }
+  }
+  
+  $last_type = array_pop($options);
+  
+  if ($type == $last_type) {
+    return $options;
+  }
+  
+  return(_fetch_materials($last_type, $options));
+}
+
 /**
  * Ting search settings form - Material tab
  * 
@@ -150,28 +203,10 @@ function ting_admin_settings_form_material($form_state) {
     '#tree' => FALSE
   );
   
-  // Fetch material information from Ting
-  require_once drupal_get_path('module', 'ting') . '/ting.client.inc';
-  $request = ting_get_request_factory()->getScanRequest();
-	$request->setField('phrase.type');
-	$request->setLower('');
-	
-	// TODO: Fix webservice to really use the quantity
-	$request->setNumResults(9999);
-	$data = ting_execute($request);
-	
-	if (is_array($data->terms)) {
-    foreach ($data->terms as $m) {
-      if ($m->name != '') {
-        $options[$m->name] = $m->name;
-      }
-    }
-  }  
-  
   $form['ting_materials'] = array(
     '#type' => 'checkboxes',
     '#default_value' => variable_get('ting_materials', array()),
-    '#options' => $options,
+    '#options' => _fetch_materials(),
     '#description' => t('Check which material types to be searchable in the ting_ssearch.'),
   );
   

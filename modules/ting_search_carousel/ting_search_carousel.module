@@ -37,6 +37,46 @@ function ting_search_carousel_menu() {
 }
 
 /**
+ * Implements the hook_covers_imagecache_default_presets, makes default presets used for this module
+ *
+ * @return array
+ * @author Hasse R. Hansen, Reload! A/S
+ */
+function ting_search_carousel_imagecache_default_presets() {
+  $preset = array();
+  $preset['ting_search_carousel'] = array(
+    'presetname' => 'ting_search_carousel',
+    'actions' => array(
+      array(
+        'action' => 'imagecache_scale',
+        'data' => array(
+          'width' => 112,
+          'height' => 140,
+          'upscale' => 0,
+        ),
+        'weight' => 0,
+      ),
+      array(
+        'action' => 'canvasactions_definecanvas',
+        'data' => array(
+          'ecaxt' => array(
+            'width' => '112',
+            'height' => '140',
+            'xpos' => 'center',
+            'ypos' => 'center',),
+          'RGB' => array('HEX' => '918F91'),
+          'under' => true
+        ),
+        'weight' => 1,
+      ),
+      
+    ),
+  );
+ 
+  return $preset;
+}
+
+/**
  * Implementation of hook_perm().
  *
  * Since we are limiting the ability to create new nodes to certain users,

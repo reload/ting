@@ -14,45 +14,6 @@ function ting_search_carousel_install() {
 
   variable_set('ting_search_carousel_searches', array());
 	
-  //install ImageCache presets
-  $preset = array(
-      'presetname' => 'ting_search_carousel',
-  );
- 
-  $imagecache_actions = array(
-    array(
-      'action' => 'imagecache_scale',
-      'data' => array(
-        'width' => 112,
-        'height' => 140,
-        'upscale' => 0,
-      ),
-      'weight' => 0,
-    ),
-    array(
-      'action' => 'canvasactions_definecanvas',
-      'data' => array(
-        'ecaxt' => array(
-          'width' => '112',
-          'height' => '140',
-          'xpos' => 'center',
-          'ypos' => 'center',),
-        'RGB' => array('HEX' => '918F91'),
-        'under' => true
-      ),
-      'weight' => 1,
-    ),
-  );
- 
-  //need to install preset, id will be returned by function,
-  //then install action add presetid to action prior to install:
-  $preset = imagecache_preset_save($preset);
-  foreach ($imagecache_actions as $action)
-  {
-    $action['presetid'] = $preset['presetid'];
-    imagecache_action_save($action);	
-  }
-  drupal_set_message(t('ImageCache preset %id: %name and corresponding actions saved.', array('%id' => $preset['presetid'], '%name' => $preset['presetname'])));
 }
   
 /**

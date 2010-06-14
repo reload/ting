@@ -3,6 +3,7 @@
 /**
  * @file ting.module
  * Module to integrate the Ting search engine in our Drupal site.
+ * the reload style
  */
 
 /**

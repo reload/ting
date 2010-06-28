@@ -58,6 +58,33 @@ function ting_get_object_by_id($object_id, $enrich = FALSE) {
   return $object;
 }
 
+function ting_get_object_by_isbn($isbn, $enrich = FALSE) {
+  static $cache = array();
+
+  if (isset($cache[$isbn])) {
+    $object = $cache[$isbn];
+  }
+  else {
+    $request = ting_get_request_factory()->getObjectRequest();
+    $request->setISBN($isbn);
+    $request = ting_add_agency($request);
+    $object = ting_execute($request);
+
+    if ($object) {
+      $object = ting_add_object_info($object);
+    }
+  }
+
+  if ($object && $enrich && empty($object->enriched)) {
+    $object = array_shift(ting_add_additional_info(array($object)));
+    $object->enriched = TRUE;
+  }
+
+  $cache[$isbn] = $object;
+
+  return $object;
+}
+
 /**
  * Load an object from Ting by local ID (faust number).
  *

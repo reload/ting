@@ -116,7 +116,7 @@ Drupal.tingResult = function (searchResultElement, facetBrowserElement, result) 
         //Update search result and facet browser
         Drupal.renderTingSearchResults(Drupal.searchResultElement, data);
         Drupal.renderTingSearchResultPager(Drupal.searchResultElement, data);
-        Drupal.updateFacetBrowser(Drupal.facetBrowserElement, data);
+        //Drupal.updateFacetBrowser(Drupal.facetBrowserElement, data);
         Drupal.bindSelectEvent(Drupal.facetBrowserElement, searchResultElement);
         Drupal.updateSelectedFacetsFromUrl(Drupal.facetBrowserElement);
       });

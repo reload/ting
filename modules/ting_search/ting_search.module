@@ -187,11 +187,11 @@ function ting_search_add_js() {
 
   $path = drupal_get_path('module', 'ting_search');
   //Add base Prototype files for enhanced OOP
-  drupal_add_js($path . '/js/prototype/object.js', 'module', 'footer', TRUE);
-  drupal_add_js($path . '/js/prototype/enumerable.js', 'module', 'footer', TRUE);
+  //drupal_add_js($path . '/js/prototype/object.js', 'module', 'footer', TRUE);
+  //drupal_add_js($path . '/js/prototype/enumerable.js', 'module', 'footer', TRUE);
 
   //Add jQuery Url plugin
-  drupal_add_js($path . '/js/jquery.url/jquery.url.js', 'module', 'footer', TRUE);
+  drupal_add_js($path . '/js/jquery.url/jquery.url.js');//, 'module', 'footer', TRUE);
   //drupal_add_js($path . '/js/jquery.url/jquery.url.packed.js', 'module', 'footer', TRUE);
 
   // jQuery UI tabs
@@ -200,9 +200,9 @@ function ting_search_add_js() {
 
   drupal_add_js($path . '/js/ting_search.js');
   drupal_add_js($path . '/js/ting_result.js', 'module', 'footer', TRUE);
-  drupal_add_js(drupal_get_path('module', 'alma') . '/js/alma.availability.js', 'module', 'footer', TRUE);
-  drupal_add_js($path . '/js/ting_facet_browser.js', 'module', 'footer', TRUE);
-  drupal_add_css($path . '/css/ting_facet_browser.css', 'module');
+  //drupal_add_js(drupal_get_path('module', 'alma') . '/js/alma.availability.js', 'module', 'footer', TRUE);
+  //drupal_add_js($path . '/js/ting_facet_browser.js', 'module', 'footer', TRUE);
+  //drupal_add_css($path . '/css/ting_facet_browser.css', 'module');
 
   drupal_add_js(array('tingResult' => array(
     'pagerTemplate' => ting_search_render_pager_template(),

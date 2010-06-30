@@ -50,7 +50,7 @@ Drupal.tingSearch.getTingData = function(url, keys) {
 
       // Pass the data on to the result and facet browser handlers.
       Drupal.tingResult("#ting-search-result", "#ting-facet-browser", result);
-      Drupal.tingFacetBrowser("#ting-facet-browser", "#ting-search-result", result);
+//      Drupal.tingFacetBrowser("#ting-facet-browser", "#ting-search-result", result);
     }
     else {
       Drupal.tingSearch.summary.ting = { count: 0, page: 0 };

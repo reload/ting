@@ -173,7 +173,7 @@ function ting_reference_widget(&$form, &$form_state, $field, $items, $delta = 0)
   $element['#suffix'] = '</div>';
 
   $ting_object_id = isset($items[$delta]['ting_object_id']) ? $items[$delta]['ting_object_id'] : '';
-  $ting_ref_type = !empty($items[$delta]['ting_ref_type']) ? $items[$delta]['ting_ref_type'] : 'collection';
+  $ting_ref_type = !empty($items[$delta]['ting_ref_type']) ? $items[$delta]['ting_ref_type'] : 'object';
 
   $element['ting_ref_type'] = array (
     '#type' => 'radios',
@@ -181,6 +181,8 @@ function ting_reference_widget(&$form, &$form_state, $field, $items, $delta = 0)
     '#default_value' => $ting_ref_type,
     '#options' => array('collection' => t('Ting collection'), 'object' => t('Ting object')),
     '#attributes' => array('class' => 'ting-reference-type-radio'),
+    '#prefix' => '<div style="display:none">',
+    '#suffix' => '</div>',
 	);
 
   $element['search'] = array (
@@ -205,7 +207,7 @@ function ting_reference_widget(&$form, &$form_state, $field, $items, $delta = 0)
   	'#attributes' => array('class' => 'ting-object-id')
   );
   $element['description'] = array (
-    '#type' => 'textarea',
+    '#type' => 'hidden',
     '#title' => 'Description',
     '#rows' => 2,
     '#default_value' => isset($items[$delta]['description']) ? $items[$delta]['description'] : '',

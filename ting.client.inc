@@ -59,7 +59,10 @@ function ting_get_object_by_id($object_id, $enrich = FALSE) {
 }
 
 function ting_get_object_by_isbn($isbn, $enrich = FALSE) {
-  static $cache = array();
+	/* isbn conversion to isbn13 */
+	$isbn = convertToEAN($isbn);
+	
+	static $cache = array();
 
   if (isset($cache[$isbn])) {
     $object = $cache[$isbn];

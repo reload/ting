@@ -521,11 +521,14 @@ function ting_add_agency(TingClientAgentRequest $request) {
 */
 function ting_add_supporting_types(TingClientSearchRequest $request) {
   $supportingTypes = arrange_types(variable_get('ting_materials', array()));
-	foreach ($supportingTypes as &$type)
-	{
-		$type = 'facet.type="' . $type . '"';
-	}
-	$request->setQuery($request->getQuery().' ('.implode(' OR ', $supportingTypes).')');
+  if(!empty($supportingTypes))
+  {
+  	foreach ($supportingTypes as &$type)
+  	{
+  		$type = 'facet.type="' . $type . '"';
+  	}
+  	$request->setQuery($request->getQuery().' ('.implode(' OR ', $supportingTypes).')');
+  }
 	return $request;
 }
 

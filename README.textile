@@ -1,0 +1,1 @@
+Fork of the TING client for use in the Netlydbog project - github.com/reload/netlydbog
